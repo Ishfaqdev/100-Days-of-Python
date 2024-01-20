@@ -5,6 +5,6 @@ hieght = float(hieght)
 wieght = int(wieght)
 
 
-age = round(wieght/hieght**2)
+age = round(wieght/(hieght**2))
 
 print(f"Your age is {age}")
