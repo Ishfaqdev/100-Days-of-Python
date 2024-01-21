@@ -5,9 +5,10 @@ bmi = round(wieght/(hieght**2))
 
 """
 Underweight: BMI less than 18.5
-Normal weight: BMI between 18.5 and 24.9
-Overweight: BMI between 25 and 29.9
-Obese: BMI of 30 or greater
+Normal weight: BMI between 18.5 and 25
+Overweight: BMI between 25 and 30
+Obese: BMI of between 30 35
+Clinically: BMI 35 or greater
 
 """
 if bmi < 18.5:
