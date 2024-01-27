@@ -8,18 +8,9 @@ df = pd.read_csv(file_path)
 # Convert the DataFrame to a list of dictionaries
 quiz = df.to_dict(orient='records')
 
-# Function to convert a list of options to labeled options (A, B, C, D)
-
 
 def label_options(options):
     return [f"{chr(65 + i)}. {option}" for i, option in enumerate(options)]
-
-# Function to check if the user's answer is correct
-
-
-def is_correct(user_answer, correct_option):
-    # Check if the user's answer matches the correct option or its corresponding letter
-    return user_answer.upper() == correct_option.upper() or user_answer.upper() == correct_option.upper()[0]
 
 
 # Shuffle the quiz questions to randomize the order
@@ -30,18 +21,12 @@ while True:
     # Shuffle the quiz questions to randomize the order
     random.shuffle(quiz)
 
-    # Randomly select 20 questions
+    # Randomly select 5 questions
     selected_questions = quiz[:5]
 
     # Ask each question and check the user's answer
     for question in selected_questions:
         print(question['Question'])
-
-        # Check if the correct answer is missing or undefined
-        if pd.isna(question['Correct Option']):
-            print("Correct answer is not defined for this question.")
-            continue
-
         # Label options as A, B, C, D
         labeled_options = label_options(
             [question['Option A'], question['Option B'], question['Option C'], question['Option D']])
@@ -49,19 +34,20 @@ while True:
             print(option)
 
         user_answer = input(
-            "Enter the correct option letter (A, B, C, or D): ")
+            "Enter the correct option letter (A, B, C, or D): ").upper()
 
-        if pd.isna(question['Correct Option']):
-            print("Correct answer is not defined for this question.")
-        elif is_correct(user_answer, question['Correct Option']):
-            print(
-                f"Correct! The correct answer is {question['Correct Option']}.\n")
+        # Extract the correct option letter from the full option text
+        correct_option = [key for key, value in question.items(
+        ) if value == question['Correct Option']][0]
+        correct_letter = correct_option.split()[-1]
+
+        if user_answer == correct_letter:
+            print("Correct!\n")
             score += 1
         else:
-            print(
-                f"Wrong! The correct answer is {question['Correct Option']}.\n")
+            print(f"Wrong! The correct answer is {option}.\n")
 
-    if score >= 15:  # Adjust the passing score as needed
+    if score >= 3:  # Adjust the passing score as needed
         print("Congratulations! You have successfully passed the test")
         print(f"Your final score is: {score}/{len(selected_questions)}")
     else:
