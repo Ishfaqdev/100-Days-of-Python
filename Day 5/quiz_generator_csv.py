@@ -2,7 +2,7 @@ import pandas as pd
 import random
 
 # Load quiz questions from the CSV file
-file_path = 'D:/UniqueQuiz1.csv'  # Adjust the file path accordingly
+file_path = 'D:/UniqueQuiz123.csv'  # Adjust the file path accordingly
 df = pd.read_csv(file_path)
 
 # Convert the DataFrame to a list of dictionaries
